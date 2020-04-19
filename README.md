@@ -1,4 +1,4 @@
-# 🧩 dl-plugin
+# 🧩 dynlib-plugin
 
 Small example of using [`dlopen`](https://linux.die.net/man/3/dlopen) to
 register plugin data into an application.
