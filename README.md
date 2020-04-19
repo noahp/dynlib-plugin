@@ -12,17 +12,10 @@ Which don't necessarily have a purpose-built native plugin infrastructure.
 The example can be run by:
 
 ```bash
-# use the `test` rule to build example plugins and run the main app, loading
-# them
-❯ PLUGIN_NAMES='one two three four' make test
-cc  -rdynamic main.c -ldl -o plugin-loading
-cc  -shared -rdynamic -DPLUGIN_NAME=one plugin.c -o one.so
-cc  -shared -rdynamic -DPLUGIN_NAME=two plugin.c -o two.so
-cc  -shared -rdynamic -DPLUGIN_NAME=three plugin.c -o three.so
-cc  -shared -rdynamic -DPLUGIN_NAME=four plugin.c -o four.so
-./plugin-loading ./one.so ./two.so ./three.so ./four.so
-Registering '🦄 hello from one 🦄'
-Registering '🦄 hello from two 🦄'
-Registering '🦄 hello from three 🦄'
-Registering '🦄 hello from four 🦄'
+# use the `test-mixed` to build c and rust dynlib plugins, and the main app,
+# and run the main app loading the plugins
+❯ make test-mixed
+./plugin-loading rust/target/release/librust.so ./plugin-1.so
+Registering '🦀 hello from rust! 🦀'
+Registering '🦄 hello from C plugin-1 🦄'
 ```

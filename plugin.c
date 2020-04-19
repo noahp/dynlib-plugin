@@ -7,5 +7,5 @@
 
 //! This function is called when the lib is loaded via dlopen
 void __attribute__((constructor)) entrance_point(void) {
-  plugin_lib_register("🦄 hello from " xstr(PLUGIN_NAME) " 🦄");
+  plugin_lib_register("🦄 hello from C " xstr(PLUGIN_NAME) " 🦄");
 }

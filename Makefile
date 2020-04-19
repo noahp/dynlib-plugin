@@ -15,3 +15,16 @@ $(PLUGIN_NAMES:%=%.so): plugin.c
 .PHONY: test
 test: plugin-loading $(PLUGIN_NAMES:%=%.so)
 	./plugin-loading $(PLUGIN_NAMES:%=./%.so)
+
+# Test the same, but with a rust dynlib
+rust/target/release/librust.so:
+	cd rust && cargo build --release
+
+.PHONY: test-rust
+test-rust: plugin-loading rust/target/release/librust.so
+	./plugin-loading rust/target/release/librust.so
+
+# Demonstrate loading rust + c dynlib plugins
+.PHONY: test-mixed
+test-mixed: plugin-loading rust/target/release/librust.so $(PLUGIN_NAMES:%=%.so)
+	./plugin-loading rust/target/release/librust.so $(PLUGIN_NAMES:%=./%.so)
